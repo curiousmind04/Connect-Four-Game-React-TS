@@ -1,0 +1,73 @@
+.container {
+  background-color: var(--white);
+  border-radius: 2.5rem;
+  border: 3px solid var(--black);
+  box-shadow: 0 10px 0 var(--black);
+  padding: 30px 1.25rem 61px 1.25rem;
+  position: relative;
+}
+
+.container h2 {
+  color: var(--black);
+  width: 169px;
+  font-size: 56px;
+  line-height: 71px;
+  text-transform: uppercase;
+  margin-bottom: 29px;
+  margin-inline: auto;
+}
+
+.container h3 {
+  color: var(--purple);
+  font-size: 1.25rem;
+  line-height: 26px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.container p {
+  color: var(--black);
+  opacity: 0.66;
+  line-height: 1.25rem;
+}
+
+.container > p {
+  margin-bottom: 33px;
+}
+
+.numlist {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+
+.num {
+  color: var(--black);
+  height: 20px;
+  width: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.container a {
+  width: fit-content;
+  display: block;
+  position: absolute;
+  bottom: -40px;
+  left: calc(50% - 35px);
+}
+
+.container a svg {
+  vertical-align: bottom;
+}
+
+@media (hover: hover) {
+  .container a:hover .outline {
+    fill: var(--dpurple);
+  }
+}

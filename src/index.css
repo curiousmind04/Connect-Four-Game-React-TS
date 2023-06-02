@@ -1,4 +1,29 @@
+@font-face {
+  font-family: "SpaceGrotesk";
+  src: url("/assets/fonts/static/SpaceGrotesk-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "SpaceGrotesk";
+  src: url("/assets/fonts/static/SpaceGrotesk-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "SpaceGroteskVF";
+  src: url("/assets/fonts/SpaceGrotesk-VariableFont_wght.ttf")
+    format("truetype");
+}
+
 :root {
+  --black: hsl(0, 0%, 0%);
+  --dpurple: hsl(257, 67%, 51%);
+  --purple: hsl(257, 100%, 64%);
+  --red: hsl(347, 97%, 70%);
+  --yellow: hsl(41, 100%, 70%);
+  --white: hsl(0, 0%, 100%);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -12,8 +37,44 @@
   padding: 0;
 }
 
-body {
-  min-height: 100vh;
+button,
+a {
+  font: inherit;
+  cursor: pointer;
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
+}
+
+body {
+  background-color: var(--purple);
+  font: 500 1rem "SpaceGroteskVF", "SpaceGrotesk", sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 1.25rem;
+}
+
+/* @media (min-width: 48rem) {
+  body {
+    background-color: var(--dpurple);
+  }
+} */
 
 /* @media (prefers-color-scheme: light) {} */
