@@ -1,15 +1,17 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import classes from "./Game.module.css";
 
 const GamePage = () => {
+  const [menu, setMenu] = useState<boolean>(false);
   // const gameMode =
   //   window.location.pathname === "/game-vs-computer" ? "pvc" : "pvp";
 
   return (
     <>
       <div className={classes.top}>
-        <button>Menu</button>
+        <button onClick={() => setMenu(true)}>Menu</button>
         <img src="/assets/images/logo.svg" alt="logo" />
         <button>Restart</button>
       </div>
@@ -60,10 +62,33 @@ const GamePage = () => {
             </div>
           </div>
         </div>
+        {menu && (
+          <div className={classes.menu}>
+            <h3>Pause</h3>
+            <button className={classes.btn1} onClick={() => setMenu(false)}>
+              <h4>Continue Game</h4>
+            </button>
+            <Link
+              to="/game-players"
+              className={classes.btn2}
+              onClick={() => setMenu(false)}
+            >
+              <h4>Restart</h4>
+            </Link>
+            <Link
+              to="/"
+              className={classes.btn3}
+              onClick={() => setMenu(false)}
+            >
+              <h4>Quit Game</h4>
+            </Link>
+          </div>
+        )}
       </div>
       <div className={classes.patternPlaying}></div>
       {/* <div className={classes.patternPlayer1Wins}></div>
       <div className={classes.patternPlayer2Wins}></div> */}
+      {menu && <div className={classes.backdrop}></div>}
     </>
   );
 };
