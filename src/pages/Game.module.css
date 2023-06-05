@@ -1,3 +1,8 @@
+.game {
+  max-width: 335px;
+  margin-inline: auto;
+}
+
 .top {
   width: 100%;
   display: flex;
@@ -83,35 +88,114 @@
   z-index: 1;
 }
 
+/* BOARD START */
+
 .board {
   width: 100%;
   height: fit-content;
   position: relative;
   grid-column: span 2;
+  /* pointer-events: none; */
 }
 
-.board .black {
+.black {
   display: block;
+  position: relative;
+  z-index: 1;
+  /* pointer-events: none; */
 }
 
-.board .black img,
-.board .white img {
+.white {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.black img,
+.white img {
   width: 100%;
   vertical-align: bottom;
 }
 
-/* .board .white img {
-  height: calc(100% - 10px);
-} */
-
-.board .white {
+.boardGrid {
+  /* background-color: rgba(0, 0, 0, 0.2); */
   width: 100%;
-  /* height: calc(100% - 10px); */
+  aspect-ratio: 7/6;
+  display: grid;
+  grid-template-columns: repeat(7, calc((100% - 30px) / 7));
+  grid-template-rows: repeat(6, calc((100% - 25px) / 6));
+  column-gap: 5px;
+  row-gap: 5px;
+  padding: 7px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
 }
+
+.boardGrid > div {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* .boardGrid > div picture[hidden="true"] {
+  transform: translateY(500px);
+} */
+
+.boardGrid div[data-theme="top"] img {
+  /* animation: 4s 1 forwards dropin; */
+  /* transform: translateY(-200px); */
+  display: none;
+}
+
+.boardGrid div[data-theme="drop"] img {
+  animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+.boardGrid > div img {
+  width: 100%;
+  vertical-align: bottom;
+  position: relative;
+}
+
+@keyframes dropin {
+  0% {
+    top: -300px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-50px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  57% {
+    transform: translateY(-10px);
+  }
+  64% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* BOARD END */
 
 .turn {
   width: fit-content;
@@ -166,7 +250,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: -1;
+  z-index: -3;
 }
 
 /* MENU START*/
@@ -240,6 +324,18 @@
 /* MENU END */
 
 @media (hover: hover) {
+  .action1:has(~ .column1:hover) {
+    background-color: hsla(347, 97%, 70%, 0.3);
+  }
+  .action1:hover,
+  .action2:hover,
+  .action3:hover,
+  .action4:hover,
+  .action5:hover,
+  .action6:hover,
+  .action7:hover {
+    background-color: hsla(347, 97%, 70%, 0.3);
+  }
   .menu a:hover,
   .menu button:hover {
     border: 3px solid var(--dpurple);

@@ -5,11 +5,22 @@ import classes from "./Game.module.css";
 
 const GamePage = () => {
   const [menu, setMenu] = useState<boolean>(false);
+  const [test, setTest] = useState<boolean>(true);
   // const gameMode =
   //   window.location.pathname === "/game-vs-computer" ? "pvc" : "pvp";
 
+  const column1Handler = () => {
+    setTest(false);
+  };
+  const column2Handler = () => {};
+  const column3Handler = () => {};
+  const column4Handler = () => {};
+  const column5Handler = () => {};
+  const column6Handler = () => {};
+  const column7Handler = () => {};
+
   return (
-    <>
+    <div className={classes.game}>
       <div className={classes.top}>
         <button onClick={() => setMenu(true)}>Menu</button>
         <img src="/assets/images/logo.svg" alt="logo" />
@@ -28,6 +39,106 @@ const GamePage = () => {
             <img src="/assets/images/player-two.svg" alt="player two icon" />
           </div>
           <div className={classes.board}>
+            <div className={classes.boardGrid}>
+              <div className={classes.action1} onClick={column1Handler}></div>
+              <div className={classes.action2} onClick={column2Handler}></div>
+              <div className={classes.action3} onClick={column3Handler}></div>
+              <div className={classes.action4} onClick={column4Handler}></div>
+              <div className={classes.action5} onClick={column5Handler}></div>
+              <div className={classes.action6} onClick={column6Handler}></div>
+              <div className={classes.action7} onClick={column7Handler}></div>
+              <div className={classes.column1}></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className={classes.column1}></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className={classes.column1}></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className={classes.column1}></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div
+                className={classes.column1}
+                // hidden={test ? true : false}
+                data-theme={test ? "top" : "drop"}
+                onClick={column1Handler}
+              >
+                <picture>
+                  <source
+                    media="(min-width: 48rem)"
+                    srcSet="/assets/images/counter-red-large.svg"
+                  />
+                  <img
+                    src="/assets/images/counter-red-small.svg"
+                    alt="red counter"
+                  />
+                </picture>
+                {/* <picture>
+                  <source
+                    media="(min-width: 48rem)"
+                    srcSet="/assets/images/counter-yellow-large.svg"
+                  />
+                  <img
+                    src="/assets/images/counter-yellow-small.svg"
+                    alt="yellow counter"
+                  />
+                </picture> */}
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/images/counter-red-small.svg"
+                  alt="red counter"
+                />
+              </div>
+            </div>
             <picture className={classes.black}>
               <source
                 media="(min-width: 48rem)"
@@ -38,6 +149,7 @@ const GamePage = () => {
                 alt="black board layer"
               />
             </picture>
+
             <picture className={classes.white}>
               <source
                 media="(min-width: 48rem)"
@@ -89,7 +201,7 @@ const GamePage = () => {
       {/* <div className={classes.patternPlayer1Wins}></div>
       <div className={classes.patternPlayer2Wins}></div> */}
       {menu && <div className={classes.backdrop}></div>}
-    </>
+    </div>
   );
 };
 
