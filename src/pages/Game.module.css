@@ -146,13 +146,13 @@
   transform: translateY(500px);
 } */
 
-.boardGrid div[data-theme="top"] img {
+.boardGrid div[data-stage="top"] img {
   /* animation: 4s 1 forwards dropin; */
   /* transform: translateY(-200px); */
   display: none;
 }
 
-.boardGrid div[data-theme="drop"] img {
+.boardGrid div[data-stage="drop"] img {
   animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 
@@ -160,6 +160,7 @@
   width: 100%;
   vertical-align: bottom;
   position: relative;
+  /* animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1); */
 }
 
 @keyframes dropin {
