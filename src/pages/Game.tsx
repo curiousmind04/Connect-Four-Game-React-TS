@@ -9,6 +9,15 @@ type Move = {
   counter: string;
 };
 
+type Result = {
+  one: number;
+  two: number;
+  three: number;
+  four: number;
+  winningMoves: number[];
+  winner: string;
+};
+
 const GamePage = () => {
   const initialMoves = [
     { position: 1, played: false, counter: "unplayed" },
@@ -56,12 +65,21 @@ const GamePage = () => {
   ];
 
   const [menu, setMenu] = useState<boolean>(false);
-  const [turn, setTurn] = useState<string>("red");
   const [moves, setMoves] = useState<Move[]>(initialMoves);
+  const [round, setRound] = useState<number>(1);
+  const [turn, setTurn] = useState<string>("red");
+  const [winner, setWinner] = useState<boolean>(false);
+  const [result, setResult] = useState<Result | null>(null);
+  const [p1Score, setP1Score] = useState<number>(0);
+  const [p2Score, setP2Score] = useState<number>(0);
   // const gameMode =
   //   window.location.pathname === "/game-vs-computer" ? "pvc" : "pvp";
 
   const placementHandler = (num: number) => {
+    if (winner) {
+      return;
+    }
+
     const newMoves = moves;
     let arr;
     let spot;
@@ -107,21 +125,15 @@ const GamePage = () => {
     }
 
     if (spot) {
-      newMoves[spot].played = true;
+      newMoves[spot] = { position: spot + 1, played: true, counter: turn };
       setMoves(newMoves);
-      const result = checkForWinner(newMoves, turn);
-
-      // if (result === false) {
-      //   setTurn(turn === "red" ? "yellow" : "red");
-      // } else {
-
-      // }
-
-      return;
+      checkForWinner(newMoves, turn);
     }
   };
 
   const checkForWinner = (moves: Move[], player: string) => {
+    let winner = false;
+
     const rows = [
       moves.slice(0, 7),
       moves.slice(7, 14),
@@ -142,13 +154,20 @@ const GamePage = () => {
           rows[i][j + 2].counter === player &&
           rows[i][j + 3].counter === player
         ) {
-          console.log("winner");
-          return {
+          setResult({
             one: rows[i][j].position,
             two: rows[i][j + 1].position,
             three: rows[i][j + 2].position,
             four: rows[i][j + 3].position,
-          };
+            winningMoves: [
+              rows[i][j].position,
+              rows[i][j + 1].position,
+              rows[i][j + 2].position,
+              rows[i][j + 3].position,
+            ],
+            winner: player,
+          });
+          winner = true;
         }
       }
     }
@@ -162,8 +181,20 @@ const GamePage = () => {
           rows[i + 2][j].counter === player &&
           rows[i + 3][j].counter === player
         ) {
-          console.log("winner");
-          return true;
+          setResult({
+            one: rows[i][j].position,
+            two: rows[i + 1][j].position,
+            three: rows[i + 2][j].position,
+            four: rows[i + 3][j].position,
+            winningMoves: [
+              rows[i][j].position,
+              rows[i + 1][j].position,
+              rows[i + 2][j].position,
+              rows[i + 3][j].position,
+            ],
+            winner: player,
+          });
+          winner = true;
         }
       }
     }
@@ -177,8 +208,20 @@ const GamePage = () => {
           rows[i - 2][j - 2].counter === player &&
           rows[i - 3][j - 3].counter === player
         ) {
-          console.log("winner");
-          return true;
+          setResult({
+            one: rows[i][j].position,
+            two: rows[i - 1][j - 1].position,
+            three: rows[i - 2][j - 2].position,
+            four: rows[i - 3][j - 3].position,
+            winningMoves: [
+              rows[i][j].position,
+              rows[i - 1][j - 1].position,
+              rows[i - 2][j - 2].position,
+              rows[i - 3][j - 3].position,
+            ],
+            winner: player,
+          });
+          winner = true;
         }
       }
     }
@@ -192,13 +235,33 @@ const GamePage = () => {
           rows[i - 2][j + 2].counter === player &&
           rows[i - 3][j + 3].counter === player
         ) {
-          console.log("winner");
-          return true;
+          setResult({
+            one: rows[i][j].position,
+            two: rows[i - 1][j + 1].position,
+            three: rows[i - 2][j + 2].position,
+            four: rows[i - 3][j + 3].position,
+            winningMoves: [
+              rows[i][j].position,
+              rows[i - 1][j + 1].position,
+              rows[i - 2][j + 2].position,
+              rows[i - 3][j + 3].position,
+            ],
+            winner: player,
+          });
+          winner = true;
         }
       }
     }
 
-    return false;
+    if (!winner) {
+      setTurn(turn === "red" ? "yellow" : "red");
+    } else {
+      turn === "red"
+        ? setP1Score((prevState) => prevState + 1)
+        : setP2Score((prevState) => prevState + 1);
+      setWinner(true);
+      setRound((prevState) => prevState + 1);
+    }
   };
 
   // console.log(moves);
@@ -228,6 +291,8 @@ const GamePage = () => {
           onClick={() => {
             setTurn("red");
             setMoves(initialMoves);
+            setP1Score(0);
+            setP2Score(0);
           }}
         >
           Restart
@@ -237,12 +302,12 @@ const GamePage = () => {
         <div className={classes.grid}>
           <div className={classes.player1}>
             <h2>Player 1</h2>
-            <span className={classes.score1}>0</span>
+            <span className={classes.score1}>{p1Score}</span>
             <img src="/assets/images/player-one.svg" alt="player one icon" />
           </div>
           <div className={classes.player2}>
             <h2>Player 2</h2>
-            <span className={classes.score2}>0</span>
+            <span className={classes.score2}>{p2Score}</span>
             <img src="/assets/images/player-two.svg" alt="player two icon" />
           </div>
           <div className={classes.board}>
@@ -257,6 +322,9 @@ const GamePage = () => {
                 >
                   {moves[moves.indexOf(move)].counter !== "unplayed" &&
                     counterChooser(moves[moves.indexOf(move)].counter)}
+                  {result?.winningMoves.includes(moves.indexOf(move) + 1) && (
+                    <div className={classes.winningCounter}></div>
+                  )}
                 </div>
               ))}
             </div>
@@ -283,20 +351,40 @@ const GamePage = () => {
             </picture>
           </div>
         </div>
-        <div className={classes.turn}>
-          <div>
-            <img
-              src={`/assets/images/turn-background-${turn}.svg`}
-              alt="turn block background"
-            />
-            <div className={classes.detail}>
-              <span className={classes.indicator}>
-                {turn === "red" ? "Player 1's Turn" : "Player 2's Turn"}
-              </span>
-              <span className={classes.time}>0s</span>
+        {!winner && (
+          <div className={classes.turn}>
+            <div>
+              <img
+                src={`/assets/images/turn-background-${turn}.svg`}
+                alt="turn block background"
+              />
+              <div className={classes.detail}>
+                <span className={classes.indicator}>
+                  {turn === "red" ? "Player 1's Turn" : "Player 2's Turn"}
+                </span>
+                <span className={classes.time}>0s</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+        {winner && (
+          <div className={classes.win}>
+            <span className={classes.indicator}>
+              {result && result.winner === "red" ? "Player 1" : "Player 2"}
+            </span>
+            <span className={classes.wins}>Wins</span>
+            <button
+              onClick={() => {
+                setWinner(false);
+                setMoves(initialMoves);
+                setResult(null);
+                setTurn(round % 2 == 0 ? "yellow" : "red");
+              }}
+            >
+              Play Again
+            </button>
+          </div>
+        )}
 
         {menu && (
           <div className={classes.menu}>
@@ -310,6 +398,8 @@ const GamePage = () => {
                 setMenu(false);
                 setTurn("red");
                 setMoves(initialMoves);
+                setP1Score(0);
+                setP2Score(0);
               }}
             >
               <h4>Restart</h4>
