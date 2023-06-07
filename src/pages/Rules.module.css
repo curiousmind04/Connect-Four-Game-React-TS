@@ -1,9 +1,11 @@
 .container {
   background-color: var(--white);
+  max-width: 486px;
   border-radius: 2.5rem;
   border: 3px solid var(--black);
   box-shadow: 0 10px 0 var(--black);
   padding: 30px 1.25rem 61px 1.25rem;
+  margin-inline: auto;
   position: relative;
 }
 
@@ -69,5 +71,43 @@
 @media (hover: hover) {
   .container a:hover .outline {
     fill: var(--dpurple);
+  }
+}
+
+@media (max-width: 20rem) {
+  .container {
+    padding-bottom: 2.5rem;
+  }
+  .container h2 {
+    width: 100px;
+    font-size: 32px;
+    line-height: 50px;
+    margin-bottom: 1rem;
+  }
+  .container h3 {
+    color: var(--purple);
+    font-size: 1rem;
+    line-height: 24px;
+  }
+  .container p {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+  .container > p {
+    margin-bottom: 1rem;
+  }
+  .numlist {
+    gap: 0.8rem;
+  }
+  .num {
+    height: 16px;
+    font-size: 0.8rem;
+    line-height: 16px;
+  }
+}
+
+@media (min-width: 48rem) {
+  .container {
+    padding: 30px 34px 54px 34px;
   }
 }

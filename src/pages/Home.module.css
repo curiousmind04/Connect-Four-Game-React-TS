@@ -1,11 +1,13 @@
 .container {
   width: 100%;
+  max-width: 400px;
   text-align: center;
+  margin-inline: auto;
 }
 
 .container > img {
-  /* width: 52px;
-  height: 52px; */
+  width: 52px;
+  height: 52px;
   margin-bottom: 79px;
 }
 
@@ -32,8 +34,9 @@
 .btn2 {
   background-color: var(--yellow);
 }
-.btn3 {
+.container .btn3 {
   background-color: var(--white);
+  margin-bottom: 0;
 }
 
 .container h2 {
@@ -58,7 +61,35 @@
   }
 }
 
+@media (max-width: 22.5rem) {
+  .container h2 {
+    font-size: 1rem;
+  }
+  .container a {
+    padding: 0 10px 0 12px;
+  }
+  .container a img {
+    width: 65px;
+    height: auto;
+  }
+}
+
+@media (max-width: 17.5rem) {
+  .container a img {
+    width: 40px;
+    height: auto;
+  }
+}
+
 @media (min-width: 48rem) {
+  .container {
+    background-color: var(--purple);
+    max-width: 486px;
+    border: 3px solid var(--black);
+    border-radius: 40px;
+    padding: 70px 40px 60px 40px;
+    box-shadow: 0px 10px 0px var(--black);
+  }
   .background {
     display: block;
     background-color: var(--dpurple);

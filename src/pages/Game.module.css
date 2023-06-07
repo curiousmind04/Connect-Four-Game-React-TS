@@ -206,6 +206,15 @@
   animation: 2.3s 1s infinite ease-in-out fade;
 }
 
+.marker {
+  width: 15px;
+  height: auto;
+  position: absolute;
+  left: calc(50% - 7.5px);
+  top: -1.4rem;
+  /* display: block !important; */
+}
+
 @keyframes column1fade {
   50% {
     background-color: blue;
@@ -296,7 +305,8 @@
 
 /* BOARD END */
 
-.turn {
+.redTurn,
+.yellowTurn {
   width: fit-content;
   position: absolute;
   bottom: 0;
@@ -304,12 +314,14 @@
   z-index: 3;
 }
 
-.turn > div {
+.redTurn > div,
+.yellowTurn > div {
   width: fit-content;
   position: relative;
 }
 
-.turn img {
+.redTurn img,
+.yellowTurn img {
   vertical-align: bottom;
 }
 
@@ -333,11 +345,19 @@
   text-transform: uppercase;
 }
 
+.yellowTurn .indicator {
+  color: var(--black);
+}
+
 .time {
   color: var(--white);
   font-size: 56px;
   font-weight: 700;
   line-height: 71px;
+}
+
+.yellowTurn .time {
+  color: var(--black);
 }
 
 .win {
@@ -393,6 +413,13 @@
   bottom: 0;
   left: 0;
   z-index: -3;
+}
+
+.patternPlayer1Wins {
+  background-color: var(--red);
+}
+.patternPlayer2Wins {
+  background-color: var(--yellow);
 }
 
 /* MENU START*/
@@ -466,7 +493,7 @@
 /* MENU END */
 
 @media (hover: hover) {
-  .action1:has(~ .column1:hover) {
+  /* .action1:has(~ .column1:hover) {
     background-color: hsla(347, 97%, 70%, 0.3);
   }
   .action1:hover,
@@ -477,7 +504,7 @@
   .action6:hover,
   .action7:hover {
     background-color: hsla(347, 97%, 70%, 0.3);
-  }
+  } */
 
   .boardGrid > :nth-child(1):has(~ :nth-child(7n - 6):hover),
   .boardGrid > :nth-child(2):has(~ :nth-child(7n - 5):hover),
@@ -496,10 +523,22 @@
     background-color: hsla(347, 97%, 70%, 0.3);
     opacity: 1;
   }
-  /* .boardGrid :nth-child(7n - 5):hover {
-    background-color: black !important;
-    opacity: 1;
-  } */
+  .boardGrid > :nth-child(1):has(~ :nth-child(7n - 6):hover) .marker,
+  .boardGrid > :nth-child(2):has(~ :nth-child(7n - 5):hover) .marker,
+  .boardGrid > :nth-child(3):has(~ :nth-child(7n - 4):hover) .marker,
+  .boardGrid > :nth-child(4):has(~ :nth-child(7n - 3):hover) .marker,
+  .boardGrid > :nth-child(5):has(~ :nth-child(7n - 2):hover) .marker,
+  .boardGrid > :nth-child(6):has(~ :nth-child(7n - 1):hover) .marker,
+  .boardGrid > :nth-child(7):has(~ :nth-child(7n):hover) .marker,
+  .boardGrid > :nth-child(1):hover .marker,
+  .boardGrid > :nth-child(2):hover .marker,
+  .boardGrid > :nth-child(3):hover .marker,
+  .boardGrid > :nth-child(4):hover .marker,
+  .boardGrid > :nth-child(5):hover .marker,
+  .boardGrid > :nth-child(6):hover .marker,
+  .boardGrid > :nth-child(7):hover .marker {
+    display: block !important;
+  }
   .menu a:hover,
   .menu button:hover {
     border: 3px solid var(--dpurple);

@@ -71,6 +71,12 @@ body {
   padding: 5rem 1.25rem;
 }
 
+@media (max-width: 22.5rem) {
+  #root {
+    padding-inline: 1rem;
+  }
+}
+
 /* @media (min-width: 48rem) {
   body {
     background-color: var(--dpurple);
