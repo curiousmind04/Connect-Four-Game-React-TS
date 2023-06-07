@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import classes from "./Game.module.css";
 
@@ -10,11 +10,7 @@ type Move = {
 };
 
 type Result = {
-  one: number;
-  two: number;
-  three: number;
-  four: number;
-  winningMoves: number[];
+  winningMoves: number[] | null;
   winner: string;
 };
 
@@ -68,12 +64,87 @@ const GamePage = () => {
   const [moves, setMoves] = useState<Move[]>(initialMoves);
   const [round, setRound] = useState<number>(1);
   const [turn, setTurn] = useState<string>("red");
-  const [winner, setWinner] = useState<boolean>(false);
+  const [winner, setWinner] = useState<boolean | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [p1Score, setP1Score] = useState<number>(0);
   const [p2Score, setP2Score] = useState<number>(0);
+  const [time, setTime] = useState<number>(10);
   // const gameMode =
   //   window.location.pathname === "/game-vs-computer" ? "pvc" : "pvp";
+
+  useEffect(() => {
+    const countTo = new Date().getTime() + 10000;
+    if (!winner) {
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+
+        const remainingTime = countTo - now;
+
+        // console.log("time left");
+
+        if (remainingTime < 1) {
+          console.log("time done");
+          turn === "red"
+            ? setP2Score((prevState) => prevState + 1)
+            : setP1Score((prevState) => prevState + 1);
+          setWinner(true);
+          setRound((prevState) => prevState + 1);
+          setResult({
+            winningMoves: null,
+            winner: turn === "red" ? "yellow" : "red",
+          });
+          clearInterval(interval);
+          return;
+        }
+
+        timeHandler(remainingTime);
+      }, 250);
+
+      return () => clearInterval(interval);
+    }
+  }, [turn, winner]);
+
+  // useEffect(() => {
+  //   const countTo = new Date().getTime() + 10000;
+  //   if (!winner) {
+  //     const interval = setInterval(() => {
+  //       const now = new Date().getTime();
+
+  //       const remainingTime = countTo - now - time;
+
+  //       if (remainingTime < 1) {
+  //         console.log("time done");
+  //         turn === "red"
+  //           ? setP2Score((prevState) => prevState + 1)
+  //           : setP1Score((prevState) => prevState + 1);
+  //         setWinner(true);
+  //         setRound((prevState) => prevState + 1);
+  //         setResult({
+  //           winningMoves: null,
+  //           winner: turn === "red" ? "yellow" : "red",
+  //         });
+
+  //         clearInterval(interval);
+
+  //         return;
+  //       }
+
+  //       timeHandler(remainingTime);
+  //     }, 250);
+
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [menu, time, turn, winner]);
+
+  // console.log(round);
+
+  const timeHandler = (remainingTime: number) => {
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    // console.log(seconds);
+    setTime(seconds);
+  };
+
+  // console.log(time);
 
   const placementHandler = (num: number) => {
     if (winner) {
@@ -82,7 +153,7 @@ const GamePage = () => {
 
     const newMoves = moves;
     let arr;
-    let spot;
+    let spot: boolean | number = false;
 
     if ([35, 28, 21, 14, 7, 0].includes(num)) {
       arr = [35, 28, 21, 14, 7, 0];
@@ -106,6 +177,9 @@ const GamePage = () => {
       arr = [41, 34, 27, 20, 13, 6];
     }
 
+    // console.log(num);
+    // console.log(arr);
+
     if (arr) {
       if (moves[arr[0]].played === false) {
         spot = arr[0];
@@ -124,7 +198,10 @@ const GamePage = () => {
       }
     }
 
-    if (spot) {
+    console.log(spot);
+
+    if (typeof spot === "number") {
+      console.log(spot);
       newMoves[spot] = { position: spot + 1, played: true, counter: turn };
       setMoves(newMoves);
       checkForWinner(newMoves, turn);
@@ -155,10 +232,6 @@ const GamePage = () => {
           rows[i][j + 3].counter === player
         ) {
           setResult({
-            one: rows[i][j].position,
-            two: rows[i][j + 1].position,
-            three: rows[i][j + 2].position,
-            four: rows[i][j + 3].position,
             winningMoves: [
               rows[i][j].position,
               rows[i][j + 1].position,
@@ -182,10 +255,6 @@ const GamePage = () => {
           rows[i + 3][j].counter === player
         ) {
           setResult({
-            one: rows[i][j].position,
-            two: rows[i + 1][j].position,
-            three: rows[i + 2][j].position,
-            four: rows[i + 3][j].position,
             winningMoves: [
               rows[i][j].position,
               rows[i + 1][j].position,
@@ -209,10 +278,6 @@ const GamePage = () => {
           rows[i - 3][j - 3].counter === player
         ) {
           setResult({
-            one: rows[i][j].position,
-            two: rows[i - 1][j - 1].position,
-            three: rows[i - 2][j - 2].position,
-            four: rows[i - 3][j - 3].position,
             winningMoves: [
               rows[i][j].position,
               rows[i - 1][j - 1].position,
@@ -236,10 +301,6 @@ const GamePage = () => {
           rows[i - 3][j + 3].counter === player
         ) {
           setResult({
-            one: rows[i][j].position,
-            two: rows[i - 1][j + 1].position,
-            three: rows[i - 2][j + 2].position,
-            four: rows[i - 3][j + 3].position,
             winningMoves: [
               rows[i][j].position,
               rows[i - 1][j + 1].position,
@@ -253,14 +314,36 @@ const GamePage = () => {
       }
     }
 
+    //check for stalemate
+    let totalMoves = 0;
+    moves.forEach((move) => {
+      if (move.played) {
+        totalMoves++;
+      }
+    });
+
+    if (totalMoves == 42) {
+      console.log("winner");
+      setRound((prevState) => prevState + 1);
+      setWinner(true);
+      setResult({
+        winningMoves: null,
+        winner: "stalemate",
+      });
+      winner = true;
+      return;
+    }
+
     if (!winner) {
       setTurn(turn === "red" ? "yellow" : "red");
+      setTime(10);
     } else {
+      console.log("winner");
+      setRound((prevState) => prevState + 1);
       turn === "red"
         ? setP1Score((prevState) => prevState + 1)
         : setP2Score((prevState) => prevState + 1);
       setWinner(true);
-      setRound((prevState) => prevState + 1);
     }
   };
 
@@ -290,6 +373,10 @@ const GamePage = () => {
         <button
           onClick={() => {
             setTurn("red");
+            setRound(1);
+            setTime(10);
+            setWinner(winner === true || winner === false ? null : false);
+            setResult(null);
             setMoves(initialMoves);
             setP1Score(0);
             setP2Score(0);
@@ -322,9 +409,11 @@ const GamePage = () => {
                 >
                   {moves[moves.indexOf(move)].counter !== "unplayed" &&
                     counterChooser(moves[moves.indexOf(move)].counter)}
-                  {result?.winningMoves.includes(moves.indexOf(move) + 1) && (
-                    <div className={classes.winningCounter}></div>
-                  )}
+                  {result &&
+                    result.winningMoves &&
+                    result.winningMoves.includes(moves.indexOf(move) + 1) && (
+                      <div className={classes.winningCounter}></div>
+                    )}
                 </div>
               ))}
             </div>
@@ -362,7 +451,7 @@ const GamePage = () => {
                 <span className={classes.indicator}>
                   {turn === "red" ? "Player 1's Turn" : "Player 2's Turn"}
                 </span>
-                <span className={classes.time}>0s</span>
+                <span className={classes.time}>{time}</span>
               </div>
             </div>
           </div>
@@ -370,15 +459,23 @@ const GamePage = () => {
         {winner && (
           <div className={classes.win}>
             <span className={classes.indicator}>
-              {result && result.winner === "red" ? "Player 1" : "Player 2"}
+              {result && result.winner === "red" && "Player 1"}
+              {result && result.winner === "yellow" && "Player 2"}
+              {result && result.winner === "stalemate" && "Stalemate"}
             </span>
-            <span className={classes.wins}>Wins</span>
+            <span className={classes.wins}>
+              {(result && result.winner === "red") ||
+              (result && result.winner === "yellow")
+                ? "Wins"
+                : "Tie Game"}
+            </span>
             <button
               onClick={() => {
                 setWinner(false);
                 setMoves(initialMoves);
                 setResult(null);
                 setTurn(round % 2 == 0 ? "yellow" : "red");
+                setTime(10);
               }}
             >
               Play Again
@@ -400,6 +497,10 @@ const GamePage = () => {
                 setMoves(initialMoves);
                 setP1Score(0);
                 setP2Score(0);
+                setRound(1);
+                setTime(10);
+                setWinner(winner === true || winner === false ? null : false);
+                setResult(null);
               }}
             >
               <h4>Restart</h4>

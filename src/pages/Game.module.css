@@ -209,36 +209,43 @@
 @keyframes column1fade {
   50% {
     background-color: blue;
+    opacity: 0.6;
   }
 }
 @keyframes column2fade {
   50% {
     background-color: turquoise;
+    opacity: 0.6;
   }
 }
 @keyframes column3fade {
   50% {
     background-color: darkgreen;
+    opacity: 0.6;
   }
 }
 @keyframes column4fade {
   50% {
     background-color: limegreen;
+    opacity: 0.6;
   }
 }
 @keyframes column5fade {
   50% {
     background-color: orangered;
+    opacity: 0.6;
   }
 }
 @keyframes column6fade {
   50% {
     background-color: red;
+    opacity: 0.6;
   }
 }
 @keyframes column7fade {
   50% {
     background-color: palevioletred;
+    opacity: 0.6;
   }
 }
 
