@@ -1,28 +1,28 @@
 .container {
   background-color: var(--white);
-  max-width: 486px;
+  max-width: 30.375rem;
   border-radius: 2.5rem;
-  border: 3px solid var(--black);
-  box-shadow: 0 10px 0 var(--black);
-  padding: 30px 1.25rem 61px 1.25rem;
+  border: 0.1875rem solid var(--black);
+  box-shadow: 0 0.625rem 0 var(--black);
+  padding: 1.875rem 1.25rem 3.8125rem 1.25rem;
   margin-inline: auto;
   position: relative;
 }
 
 .container h2 {
   color: var(--black);
-  width: 169px;
-  font-size: 56px;
-  line-height: 71px;
+  width: 10.5625rem;
+  font-size: 3.5rem;
+  line-height: 4.4375rem;
   text-transform: uppercase;
-  margin-bottom: 29px;
+  margin-bottom: 1.8125rem;
   margin-inline: auto;
 }
 
 .container h3 {
   color: var(--purple);
   font-size: 1.25rem;
-  line-height: 26px;
+  line-height: 1.625rem;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
@@ -34,7 +34,7 @@
 }
 
 .container > p {
-  margin-bottom: 33px;
+  margin-bottom: 2.0625rem;
 }
 
 .numlist {
@@ -42,15 +42,15 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .num {
   color: var(--black);
-  height: 20px;
-  width: 12px;
+  height: 1.25rem;
+  width: 0.75rem;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 1.25rem;
   display: flex;
   justify-content: center;
   flex-shrink: 0;
@@ -60,8 +60,8 @@
   width: fit-content;
   display: block;
   position: absolute;
-  bottom: -40px;
-  left: calc(50% - 35px);
+  bottom: -2.5rem;
+  left: calc(50% - 2.1875rem);
 }
 
 .container a svg {
@@ -79,15 +79,15 @@
     padding-bottom: 2.5rem;
   }
   .container h2 {
-    width: 100px;
-    font-size: 32px;
-    line-height: 50px;
+    width: 6.25rem;
+    font-size: 2rem;
+    line-height: 3.125rem;
     margin-bottom: 1rem;
   }
   .container h3 {
     color: var(--purple);
     font-size: 1rem;
-    line-height: 24px;
+    line-height: 1.5rem;
   }
   .container p {
     font-size: 0.8rem;
@@ -100,14 +100,14 @@
     gap: 0.8rem;
   }
   .num {
-    height: 16px;
+    height: 1rem;
     font-size: 0.8rem;
-    line-height: 16px;
+    line-height: 1rem;
   }
 }
 
 @media (min-width: 48rem) {
   .container {
-    padding: 30px 34px 54px 34px;
+    padding: 1.875rem 2.125rem 3.375rem 2.125rem;
   }
 }
