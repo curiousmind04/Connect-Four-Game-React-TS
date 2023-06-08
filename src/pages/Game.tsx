@@ -312,7 +312,7 @@ const GamePage = () => {
 
   const placementHandler = useCallback(
     (num: number) => {
-      console.log(num);
+      // console.log(num);
 
       if (winner) {
         return;
@@ -370,7 +370,7 @@ const GamePage = () => {
       }
 
       if (typeof spot === "number") {
-        console.log(spot);
+        // console.log(spot);
         newMoves[spot] = { position: spot + 1, played: true, counter: turn };
         setMoves(newMoves);
         setRemainingMoves((prevState) =>

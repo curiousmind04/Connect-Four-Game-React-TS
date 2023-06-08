@@ -11,6 +11,11 @@
   margin-bottom: 50px;
 }
 
+.top img {
+  width: 52px;
+  height: 52px;
+}
+
 .top button {
   background-color: var(--dpurple);
   color: var(--white);
@@ -110,6 +115,7 @@
   left: 0;
   z-index: 3;
   pointer-events: none;
+  /* display: none; */
 }
 
 .black img,
@@ -212,7 +218,6 @@
   position: absolute;
   left: calc(50% - 7.5px);
   top: -1.4rem;
-  /* display: block !important; */
 }
 
 @keyframes column1fade {
@@ -493,19 +498,9 @@
 /* MENU END */
 
 @media (hover: hover) {
-  /* .action1:has(~ .column1:hover) {
-    background-color: hsla(347, 97%, 70%, 0.3);
+  .top button:hover {
+    background-color: var(--red);
   }
-  .action1:hover,
-  .action2:hover,
-  .action3:hover,
-  .action4:hover,
-  .action5:hover,
-  .action6:hover,
-  .action7:hover {
-    background-color: hsla(347, 97%, 70%, 0.3);
-  } */
-
   .boardGrid > :nth-child(1):has(~ :nth-child(7n - 6):hover),
   .boardGrid > :nth-child(2):has(~ :nth-child(7n - 5):hover),
   .boardGrid > :nth-child(3):has(~ :nth-child(7n - 4):hover),
@@ -539,9 +534,257 @@
   .boardGrid > :nth-child(7):hover .marker {
     display: block !important;
   }
+  .win button:hover {
+    background-color: var(--red);
+  }
   .menu a:hover,
   .menu button:hover {
     border: 3px solid var(--dpurple);
     box-shadow: 0px 10px 0px var(--dpurple);
+  }
+}
+
+@media (max-width: 370px) {
+  .top {
+    margin-bottom: 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .container {
+    padding-bottom: 115px;
+  }
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 97px 97px auto;
+    column-gap: 0;
+    row-gap: 16px;
+  }
+  .board {
+    grid-column: span 1;
+  }
+  .boardGrid {
+    padding: 5px;
+  }
+  .player1,
+  .player2 {
+    justify-self: center;
+  }
+  .winningCounter {
+    width: 16px;
+    height: 16px;
+    border: 4px solid var(--white);
+    left: calc(50% - 8px);
+    bottom: calc(50% - 9px);
+  }
+  .win {
+    width: 170px;
+    padding-inline: 10px;
+    left: calc(50% - 85px);
+  }
+  .wins {
+    color: var(--black);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 45px;
+    text-transform: uppercase;
+  }
+  .redTurn,
+  .yellowTurn {
+    bottom: 0.5rem;
+    left: calc(50% - 80px);
+  }
+  .redTurn img,
+  .yellowTurn img {
+    width: 160px;
+  }
+  .detail {
+    bottom: 1.5rem;
+  }
+  .yellowTurn .indicator,
+  .redTurn .indicator {
+    font-size: 0.8rem;
+  }
+  .time {
+    font-size: 32px;
+    line-height: 45px;
+  }
+  .patternPlaying,
+  .patternPlayer1Wins,
+  .patternPlayer2Wins {
+    height: calc(50% - 265px);
+  }
+  .menu h3 {
+    font-size: 32px;
+    line-height: 45px;
+    margin-bottom: 16px;
+  }
+  .menu h4 {
+    font-size: 1rem;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 18rem) {
+  .container {
+    padding-bottom: 125px;
+  }
+  .winningCounter {
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--white);
+    left: calc(50% - 6px);
+    bottom: calc(50% - 7px);
+  }
+  .patternPlaying,
+  .patternPlayer1Wins,
+  .patternPlayer2Wins {
+    height: calc(50% - 225px);
+  }
+}
+
+@media (min-width: 48rem) {
+  .game {
+    max-width: 632px;
+  }
+  .top {
+    margin-bottom: 32px;
+  }
+  .container {
+    padding-bottom: 115px;
+  }
+  .grid {
+    grid-template-rows: 116px auto;
+    column-gap: 35px;
+    row-gap: 3rem;
+  }
+  .player1,
+  .player2 {
+    width: 278px;
+    height: 106px;
+    padding: 0 20px 0 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+  .player2 {
+    padding: 0 0 0 20px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .player1 h2,
+  .player2 h2 {
+    font-size: 1.25rem;
+    line-height: 26px;
+    margin-bottom: 0px;
+  }
+  .score1,
+  .score2 {
+    min-width: 102px;
+    font-size: 56px;
+    line-height: 71px;
+  }
+  .boardGrid {
+    grid-template-columns: repeat(7, calc((100% - 84px) / 7));
+    grid-template-rows: repeat(6, calc((100% - 70px) / 6));
+    column-gap: 14px;
+    row-gap: 14px;
+    padding: 15px;
+  }
+  .boardGrid > div picture {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-inline: 0.15rem;
+  }
+  .winningCounter {
+    width: 34px;
+    height: 34px;
+    left: calc(50% - 17px);
+    bottom: calc(50% - 18px);
+  }
+  .marker {
+    width: 38px;
+    left: calc(50% - 19px);
+    top: -3.25rem;
+  }
+  .patternPlaying,
+  .patternPlayer1Wins,
+  .patternPlayer2Wins {
+    height: calc(50% - 315px);
+  }
+  .menu {
+    width: 486px;
+    padding: 50px 37px 47px 37px;
+    top: 11.4rem;
+    left: calc(50% - 243px);
+  }
+  .menu h3 {
+    margin-bottom: 41px;
+  }
+}
+
+@media (min-width: 69rem) {
+  .game {
+    max-width: 1040px;
+  }
+  .top {
+    max-width: 632px;
+    margin-inline: auto;
+    margin-bottom: 51px;
+  }
+  .grid {
+    grid-template-columns: 147px 632px 147px;
+    grid-template-rows: auto;
+    grid-template-areas: "player1 board player2";
+    column-gap: 57px;
+    row-gap: 0;
+  }
+  .board {
+    grid-area: board;
+  }
+  .player1 {
+    grid-area: player1;
+  }
+  .player2 {
+    grid-area: player2;
+  }
+  .player1,
+  .player2 {
+    width: 147px;
+    height: 166px;
+    padding: 46px 0 17px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    align-self: center;
+    margin-bottom: 6rem;
+  }
+  .player2 {
+    padding: 46px 0 17px 0;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .score1,
+  .score2 {
+    min-width: fit-content;
+  }
+  .player1 img {
+    top: -29.5px;
+    left: calc(50% - 27px);
+  }
+  .player2 img {
+    top: -29.5px;
+    right: calc(50% - 27px);
+  }
+  .patternPlaying,
+  .patternPlayer1Wins,
+  .patternPlayer2Wins {
+    height: calc(50% - 230px);
   }
 }
