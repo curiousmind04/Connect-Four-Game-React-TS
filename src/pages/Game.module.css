@@ -197,7 +197,8 @@
   /* display: block; */
   opacity: 1;
   /* animation: 1s cubic-bezier(0.28, 0.84, 0.42, 1) dropin; */
-  animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: dropin 0.4s, bounce 1s 0.3s cubic-bezier(0.28, 0.84, 0.42, 1);
+  /* animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1); */
 }
 
 .boardGrid > div picture {
