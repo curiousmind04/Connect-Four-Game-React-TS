@@ -226,6 +226,7 @@
   position: absolute;
   left: calc(50% - 0.46875rem);
   top: -1.4rem;
+  display: none;
 }
 
 @keyframes column1fade {
