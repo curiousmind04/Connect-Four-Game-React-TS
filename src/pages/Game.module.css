@@ -130,8 +130,6 @@
   width: 100%;
   /* height: auto; */
   /* aspect-ratio: 7/6; */
-  /* height: calc(width - width / 7); */
-  height: calc(width - 1rem);
   display: grid;
   grid-template-columns: repeat(7, calc((100% - 1.875rem) / 7));
   grid-template-rows: repeat(6, calc((100% - 1.5625rem) / 6));
@@ -146,7 +144,7 @@
 }
 
 .boardGrid > div {
-  background-color: yellow;
+  /* background-color: yellow; */
   width: 100%;
   aspect-ratio: 1;
   cursor: pointer;
