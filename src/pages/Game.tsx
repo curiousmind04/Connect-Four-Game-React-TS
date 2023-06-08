@@ -370,7 +370,6 @@ const GamePage = () => {
       }
 
       if (typeof spot === "number") {
-        // console.log(spot);
         newMoves[spot] = { position: spot + 1, played: true, counter: turn };
         setMoves(newMoves);
         setRemainingMoves((prevState) =>
