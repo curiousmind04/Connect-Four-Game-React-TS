@@ -460,7 +460,7 @@ const GamePage = () => {
       <div className={classes.container}>
         <div className={classes.grid}>
           <div className={classes.player1}>
-            <h2>Player 1</h2>
+            <h2>{gameMode === "pvp" ? "Player 1" : "You"}</h2>
             <span className={classes.score1}>{p1Score}</span>
             {gameMode !== "pvc" ? (
               <img src="/assets/images/player-one.svg" alt="player one icon" />
@@ -469,7 +469,7 @@ const GamePage = () => {
             )}
           </div>
           <div className={classes.player2}>
-            <h2>Player 2</h2>
+            <h2>{gameMode === "pvp" ? "Player 2" : "Cpu"}</h2>
             <span className={classes.score2}>{p2Score}</span>
             {gameMode !== "pvc" ? (
               <img src="/assets/images/player-two.svg" alt="player two icon" />
