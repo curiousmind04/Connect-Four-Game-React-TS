@@ -149,7 +149,7 @@
   aspect-ratio: 1;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .boardGrid > :nth-child(7n) {
@@ -188,22 +188,30 @@
 }
 
 .boardGrid div[data-stage="top"] img {
-  display: none;
+  /* display: none; */
+  opacity: 0;
+  transform: translateY(-18.75rem);
 }
 
 .boardGrid div[data-stage="drop"] img {
+  /* display: block; */
+  opacity: 1;
+  /* animation: 1s cubic-bezier(0.28, 0.84, 0.42, 1) dropin; */
   animation: dropin 0.2s, bounce 1s 0.1s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 
 .boardGrid > div picture {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
 .boardGrid > div picture img {
   width: 100%;
+  /* height: 100%; */
   vertical-align: bottom;
-  position: relative;
+  /* position: relative; */
+  /* transform: translateY(-18.75rem); */
 }
 
 .winningCounter {
@@ -284,10 +292,11 @@
 
 @keyframes dropin {
   0% {
-    top: -18.75rem;
+    transform: translateY(-18.75rem);
   }
   100% {
-    top: 0;
+    /* top: 0; */
+    transform: translateY(0);
   }
 }
 
