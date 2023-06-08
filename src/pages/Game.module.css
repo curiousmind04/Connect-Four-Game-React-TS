@@ -804,4 +804,7 @@
   .patternPlayer2Wins {
     height: calc(50% - 14.375rem);
   }
+  .menu {
+    top: 3rem;
+  }
 }
