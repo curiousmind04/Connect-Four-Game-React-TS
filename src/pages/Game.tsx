@@ -69,20 +69,20 @@ const GamePage = () => {
   const [result, setResult] = useState<Result | null>(null);
   const [p1Score, setP1Score] = useState<number>(0);
   const [p2Score, setP2Score] = useState<number>(0);
-  const [time, setTime] = useState<number>(50);
-  const [pause, setPause] = useState({ paused: false, pausedAt: 50 });
+  const [time, setTime] = useState<number>(30);
+  const [pause, setPause] = useState({ paused: false, pausedAt: 30 });
   const [compNum, setCompNum] = useState(Math.floor(Math.random() * 42));
   const gameMode =
     window.location.pathname === "/game-vs-computer" ? "pvc" : "pvp";
 
   useEffect(() => {
-    const countTo = new Date().getTime() + 50000;
+    const countTo = new Date().getTime() + 30000;
     // console.log(countTo);
 
     const pausedTime = pause.pausedAt * 1000;
     // console.log(pausedTime);
 
-    const resumedTime = countTo - (50000 - pausedTime);
+    const resumedTime = countTo - (30000 - pausedTime);
     // console.log(resumedTime);
 
     if (pause.paused) {
@@ -108,7 +108,7 @@ const GamePage = () => {
             winningMoves: null,
             winner: turn === "red" ? "yellow" : "red",
           });
-          setPause({ paused: false, pausedAt: 50 });
+          setPause({ paused: false, pausedAt: 30 });
           clearInterval(interval);
           return;
         }
@@ -294,12 +294,12 @@ const GamePage = () => {
       }
 
       if (!winner) {
-        setPause({ paused: false, pausedAt: 50 });
+        setPause({ paused: false, pausedAt: 30 });
         setTurn(turn === "red" ? "yellow" : "red");
-        setTime(50);
+        setTime(30);
       } else {
         console.log("winner");
-        setPause({ paused: false, pausedAt: 50 });
+        setPause({ paused: false, pausedAt: 30 });
         setRound((prevState) => prevState + 1);
         turn === "red"
           ? setP1Score((prevState) => prevState + 1)
@@ -442,13 +442,13 @@ const GamePage = () => {
           onClick={() => {
             setTurn("red");
             setRound(1);
-            setTime(50);
+            setTime(30);
             setWinner(winner === true || winner === false ? null : false);
             setResult(null);
             setMoves(initialMoves);
             setP1Score(0);
             setP2Score(0);
-            setPause({ paused: false, pausedAt: 50 });
+            setPause({ paused: false, pausedAt: 30 });
             setRemainingMoves(initialMoves);
           }}
         >
@@ -606,7 +606,7 @@ const GamePage = () => {
                 setMoves(initialMoves);
                 setResult(null);
                 setTurn(round % 2 == 0 ? "yellow" : "red");
-                setTime(50);
+                setTime(30);
                 setRemainingMoves(initialMoves);
               }}
             >
@@ -636,10 +636,10 @@ const GamePage = () => {
                 setP1Score(0);
                 setP2Score(0);
                 setRound(1);
-                setTime(50);
+                setTime(30);
                 setWinner(winner === true || winner === false ? null : false);
                 setResult(null);
-                setPause({ paused: false, pausedAt: 50 });
+                setPause({ paused: false, pausedAt: 30 });
                 setRemainingMoves(initialMoves);
               }}
             >
