@@ -421,6 +421,7 @@ const GamePage = () => {
         <img
           src={`/assets/images/counter-${color}-small.svg`}
           alt={`${color} counter`}
+          className={classes.counter}
         />
       </picture>
     );
