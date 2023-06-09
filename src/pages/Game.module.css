@@ -712,6 +712,9 @@
     row-gap: 0.875rem;
     padding: 0.9375rem;
   }
+  .boardGrid div[data-stage="drop"] .counter {
+    animation: dropin 0.4s, bounce 0.8s 0.3s cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
   .boardGrid > div picture {
     height: 100%;
     display: flex;
